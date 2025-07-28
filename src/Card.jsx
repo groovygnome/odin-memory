@@ -18,7 +18,7 @@ function Card({ characterName, title, onClick }) {
 
   return (
     <>
-      <div onClick={() => { onClick(picked); setPicked(true); }}>
+      <div onClick={() => { if (onClick(picked)) { setPicked(true); } else { setPicked(false); } }}>
         <img src={source} />
         <h2>{characterName}</h2>
       </div >
