@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
-function Card({ characterName, title, onClick }) {
+function Card({ characterName, id, onClick }) {
   const [picked, setPicked] = useState(false)
-  const url = 'https://api.giphy.com/v1/gifs/translate?api_key=xuFmWuuE2y1DtWQzJqOjPkkpNwBWulMh&s=' + title;
+  const url = 'https://api.giphy.com/v1/gifs/' + id + '?api_key=xuFmWuuE2y1DtWQzJqOjPkkpNwBWulMh';
   const [source, setSource] = useState('');
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function Card({ characterName, title, onClick }) {
 
   return (
     <>
-      <div onClick={() => { if (onClick(picked)) { setPicked(true); } else { setPicked(false); } }}>
+      <div onClick={() => { onClick(picked); setPicked(true) }}>
         <img src={source} />
         <h2>{characterName}</h2>
       </div >
