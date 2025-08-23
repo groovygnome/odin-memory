@@ -3,17 +3,21 @@ import './App.css'
 import Card from './Card.jsx';
 
 function Game() {
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(0);
+  const [picked, setPicked] = useState([]);
   const [highScore, setHighScore] = useState(0);
 
-  const handleClick = (selected) => {
-    if (selected) {
+  const handleClick = (key) => {
+    if (picked.includes(key)) {
       if (score > highScore) {
         setHighScore(score);
       }
       setScore(0);
+      setPicked([]);
     } else {
       setScore(score + 1);
+      let newPicked = [...picked, key];
+      setPicked(newPicked);
     }
     characterArray = shuffleArray(characterArray);
   };

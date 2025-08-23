@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 function Card({ characterName, id, onClick }) {
-  const [picked, setPicked] = useState(false)
   const url = 'https://api.giphy.com/v1/gifs/' + id + '?api_key=xuFmWuuE2y1DtWQzJqOjPkkpNwBWulMh';
   const [source, setSource] = useState('');
 
@@ -18,7 +17,7 @@ function Card({ characterName, id, onClick }) {
 
   return (
     <>
-      <div onClick={() => { onClick(picked); setPicked(true) }}>
+      <div onClick={() => { onClick(id); }}>
         <img src={source} />
         <h2>{characterName}</h2>
       </div >
