@@ -1,20 +1,5 @@
-import { useState, useEffect } from 'react'
-import './App.css'
 
-function Card({ characterName, id, onClick }) {
-  const url = 'https://api.giphy.com/v1/gifs/' + id + '?api_key=xuFmWuuE2y1DtWQzJqOjPkkpNwBWulMh';
-  const [source, setSource] = useState('');
-
-  useEffect(() => {
-    fetch((url), { mode: 'cors' })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(response) {
-        setSource(response.data.images.original.url);
-      });
-  }, []);
-
+function Card({ characterName, id, onClick, source }) {
   return (
     <>
       <div onClick={() => { onClick(id); }}>
