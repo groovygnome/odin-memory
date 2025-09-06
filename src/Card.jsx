@@ -2,7 +2,7 @@
 function Card({ characterName, id, onClick, source }) {
   return (
     <>
-      <div onClick={() => { onClick(id); }}>
+      <div className='characterCard' onClick={() => { onClick(id); }}>
         <img src={source} />
         <h2>{characterName}</h2>
       </div >

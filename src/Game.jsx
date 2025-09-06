@@ -5,20 +5,24 @@ function Game() {
   const [score, setScore] = useState(0);
   const [picked, setPicked] = useState([]);
   const [highScore, setHighScore] = useState(0);
-  const [srcs, setSrcs] = useState([]);
+  const [srcs, setSrcs] = useState(['', '', '', '', '', '', '', '', '', '', '', '']);
 
   const ids = ['uASq98lHjXAjzXjHoU', 'ueiw3W1K6vhI1JQmZS', 'ip68eDWiINMQh3qysS', '11e0I7RkHWMRh9mnQn', 'EcHz4euPUu6qxDrwBN', 'ZztwJB3iqzY1kdJrQ4', 'hSNz9fIBjMOv7l9RTT', 'f5IZQpCCgM1qwnngDD', 'krEdN3bN7IqPg6FDf3', 'NlWF3bS9f3rq5PQXha', 'QLLDW4amWtHzu27ETS', 'Vr3HlfDMnSllDmnNNh']
   const urlStart = 'https://api.giphy.com/v1/gifs/';
   const urlEnd = '?api_key=xuFmWuuE2y1DtWQzJqOjPkkpNwBWulMh';
   useEffect(() => {
-    ids.forEach((id) => {
+    ids.forEach((id, index) => {
       let url = urlStart + id + urlEnd;
       fetch((url), { mode: 'cors' })
         .then(function(response) {
           return response.json();
         })
         .then(function(response) {
-          setSrcs((prevSrcs) => [...prevSrcs, response.data.images.original.url]);
+          setSrcs((prevSrcs) => {
+            const newSrcs = [...prevSrcs]
+            newSrcs[index] = response.data.images.original.url
+            return newSrcs;
+          });
 
         });
     });
@@ -57,7 +61,7 @@ function Game() {
     <Card characterName={'Akshan'} key={6} id={'hSNz9fIBjMOv7l9RTT'} onClick={handleClick} source={srcs[6]} />,
     <Card characterName={'Yasuo'} key={7} id={'f5IZQpCCgM1qwnngDD'} onClick={handleClick} source={srcs[7]} />,
     <Card characterName={'Caitlyn'} key={8} id={'krEdN3bN7IqPg6FDf3'} onClick={handleClick} source={srcs[8]} />,
-    <Card characterName={'Nunu'} key={9} id={'NlWF3bS9f3rq5PQXha'} onClick={handleClick} source={srcs[9]} />,
+    <Card characterName={'Nunu & Willump'} key={9} id={'NlWF3bS9f3rq5PQXha'} onClick={handleClick} source={srcs[9]} />,
     <Card characterName={'Teemo'} key={10} id={'QLLDW4amWtHzu27ETS'} onClick={handleClick} source={srcs[10]} />,
     <Card characterName={'Seraphine'} key={11} id={'Vr3HlfDMnSllDmnNNh'} onClick={handleClick} source={srcs[11]} />,
   ]
@@ -66,9 +70,15 @@ function Game() {
 
   return (
     <>
-      <div className='scoreBoard'>
-        <p>Score: {score}</p>
-        <p>High Score: {highScore}</p>
+      <div className='header'>
+        <div className='title'>
+          <h1>League of Legends Memory Game</h1>
+          <p>Get points by clicking characters, don't click the same character twice!</p>
+        </div>
+        <div className='scoreBoard'>
+          <p>Score: {score}</p>
+          <p>High Score: {highScore}</p>
+        </div>
       </div>
       <div className='characterArray'>
         {characterArray}
